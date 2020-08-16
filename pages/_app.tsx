@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppProps } from 'next/app';
 
-import '../styles/globals.css';
+import '../styles/main.scss';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 // eslint-disable-next-line react/prop-types
