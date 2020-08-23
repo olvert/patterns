@@ -15,6 +15,16 @@ a {
   text-decoration: none;
 }
 
+button {
+  transition: color ease 300ms;
+}
+
+button, input {
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
