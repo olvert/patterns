@@ -4,12 +4,9 @@ export type Config = {
   delay: number,
 }
 
-const rule30 = (num: number) => {
-  // https://mathworld.wolfram.com/Rule30.html
-  if (num > 7 || num < 0) { throw new Error('invalid input'); }
-
-  return (num < 5 && num > 0) ? 1 : 0;
-};
+class Rules {
+  static readonly rule30 = [0, 1, 1, 1, 1, 0, 0, 0];
+}
 
 const createAxiom = (length: number): number[] => {
   const axiom = new Array<number>(length).fill(0);
@@ -24,7 +21,7 @@ const createNextRow = (currentRow: number[]): number[] => {
   const nextRow = new Array<number>(currentRow.length).fill(0);
   for (let i = 0; i < currentRow.length - 2; i += 1) {
     const val = (currentRow[i] * 4) + (currentRow[i + 1] * 2) + (currentRow[i + 2] * 1);
-    nextRow[i + 1] = rule30(val);
+    nextRow[i + 1] = Rules.rule30[val];
   }
 
   return nextRow;
