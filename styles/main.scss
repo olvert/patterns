@@ -19,7 +19,7 @@ button {
   transition: color ease 300ms;
 }
 
-button, input {
+button, input, select {
   &:active, &:focus {
     outline: none;
   }

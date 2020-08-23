@@ -32,6 +32,7 @@ const Home = (): JSX.Element => {
       setConfig({
         width: mainRef.current.offsetWidth,
         height: mainRef.current.offsetHeight,
+        rule: '30',
         delay: 5,
       });
     }
@@ -97,6 +98,21 @@ const Home = (): JSX.Element => {
               })}
             >
             </input>
+            <label htmlFor="rule" className="text-purple-300 text-sm mr-2">
+              Rule
+            </label>
+            <select
+              className="bg-purple-200 text-purple-700 rounded text-center text-sm px-1 w-16 mr-4"
+              name="rule"
+              id="rule"
+              onChange={(event) => setConfig({
+                ...config,
+                rule: event.currentTarget.value,
+              })}
+            >
+              <option value="30">30</option>
+              <option value="90">90</option>
+            </select>
             <label htmlFor="delay" className="text-purple-300 text-sm mr-2">
               Delay
             </label>

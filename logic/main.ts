@@ -1,12 +1,26 @@
 export type Config = {
   width: number,
   height: number,
+  rule: string,
   delay: number,
 }
 
 class Rules {
   static readonly rule30 = [0, 1, 1, 1, 1, 0, 0, 0];
+
+  static readonly rule90 = [0, 1, 0, 1, 1, 0, 1, 0];
 }
+
+const getRule = (rule: string): number[] => {
+  switch (rule) {
+    case '30':
+      return Rules.rule30;
+    case '90':
+      return Rules.rule90;
+    default:
+      throw new Error(`invalid argument in getRule: ${rule}`);
+  }
+};
 
 const createAxiom = (length: number): number[] => {
   const axiom = new Array<number>(length).fill(0);
@@ -17,11 +31,11 @@ const createAxiom = (length: number): number[] => {
   return axiom;
 };
 
-const createNextRow = (currentRow: number[]): number[] => {
+const createNextRow = (currentRow: number[], rule: number[]): number[] => {
   const nextRow = new Array<number>(currentRow.length).fill(0);
   for (let i = 0; i < currentRow.length - 2; i += 1) {
     const val = (currentRow[i] * 4) + (currentRow[i + 1] * 2) + (currentRow[i + 2] * 1);
-    nextRow[i + 1] = Rules.rule30[val];
+    nextRow[i + 1] = rule[val];
   }
 
   return nextRow;
@@ -38,16 +52,19 @@ const drawRow = (context: CanvasRenderingContext2D, row: number[], rowIndex: num
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const computeAndDraw = async (context: CanvasRenderingContext2D, config: Config): Promise<void> => {
+  const rule = getRule(config.rule);
   const axiom = createAxiom(config.width);
   const rows = [axiom];
 
   for (let i = 0; i < config.height; i += 1) {
     drawRow(context, rows[i], i);
 
-    const nextRow = createNextRow(rows[i]);
+    const nextRow = createNextRow(rows[i], rule);
     rows.push(nextRow);
 
-    await sleep(config.delay);
+    if (config.delay > 0) {
+      await sleep(config.delay);
+    }
   }
 };
 
