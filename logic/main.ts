@@ -70,5 +70,5 @@ export const computeAndDraw = async (context: CanvasRenderingContext2D, config: 
 };
 
 export const clearCanvas = (context: CanvasRenderingContext2D, config: Config): void => {
-  context.clearRect(0, 0, config.width, config.height);
+  context.clearRect(0, 0, config.width * config.pixelSize, config.height * config.pixelSize);
 };
