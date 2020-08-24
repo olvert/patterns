@@ -2,6 +2,7 @@ export type Config = {
   width: number,
   height: number,
   rule: string,
+  pixelSize: number,
   delay: number,
 }
 
@@ -41,10 +42,10 @@ const createNextRow = (currentRow: number[], rule: number[]): number[] => {
   return nextRow;
 };
 
-const drawRow = (context: CanvasRenderingContext2D, row: number[], rowIndex: number) => {
+const drawRow = (context: CanvasRenderingContext2D, row: number[], rowIndex: number, pixelSize: number) => {
   for (let i = 0; i < row.length; i += 1) {
     if (row[i] === 1) {
-      context.fillRect(i, rowIndex, 1, 1);
+      context.fillRect(i * pixelSize, rowIndex * pixelSize, pixelSize, pixelSize);
     }
   }
 };
@@ -57,7 +58,7 @@ export const computeAndDraw = async (context: CanvasRenderingContext2D, config: 
   const rows = [axiom];
 
   for (let i = 0; i < config.height; i += 1) {
-    drawRow(context, rows[i], i);
+    drawRow(context, rows[i], i, config.pixelSize);
 
     const nextRow = createNextRow(rows[i], rule);
     rows.push(nextRow);

@@ -33,6 +33,7 @@ const Home = (): JSX.Element => {
         width: mainRef.current.offsetWidth,
         height: mainRef.current.offsetHeight,
         rule: '30',
+        pixelSize: 2,
         delay: 5,
       });
     }
@@ -49,11 +50,11 @@ const Home = (): JSX.Element => {
           id="canvas"
           ref={canvasRef}
           className="absolute top-0"
-          width={config.width}
-          height={config.height}
+          width={config.width * config.pixelSize}
+          height={config.height * config.pixelSize}
           style={{
-            width: config.width,
-            height: config.height,
+            width: config.width * config.pixelSize,
+            height: config.height * config.pixelSize,
           }}
         >
         </canvas> }
@@ -113,6 +114,23 @@ const Home = (): JSX.Element => {
               <option value="30">30</option>
               <option value="90">90</option>
             </select>
+            <label htmlFor="pixel-size" className="text-purple-300 text-sm mr-2">
+              Pixel size
+            </label>
+            <input
+              className="bg-purple-200 text-purple-700 rounded text-center text-sm px-1 w-10 mr-4"
+              name="pixel-size"
+              id="pixel-size"
+              type="number"
+              min="0"
+              step="1"
+              value={config.pixelSize}
+              onChange={(event) => setConfig({
+                ...config,
+                pixelSize: parseInt(event.target.value, 10),
+              })}
+            >
+            </input>
             <label htmlFor="delay" className="text-purple-300 text-sm mr-2">
               Delay
             </label>
