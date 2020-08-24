@@ -16,7 +16,7 @@ a {
 }
 
 button {
-  transition: color ease 300ms;
+  transition: color ease-in-out 300ms;
 }
 
 button, input, select {
@@ -27,4 +27,22 @@ button, input, select {
 
 * {
   box-sizing: border-box;
+}
+
+#menu-button {
+  @apply text-purple-900;
+
+  &.open {
+    @apply text-purple-200;
+  }
+}
+
+#menu {
+  transform: translateX(-100%);
+
+  &.open {
+    transform: translateX(0%);
+  }
+
+  transition: transform ease-in-out 300ms;
 }

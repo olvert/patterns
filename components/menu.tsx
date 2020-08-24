@@ -1,16 +1,24 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Config } from '../logic/main';
 
 type Props = {
   config: Config;
   setConfig: React.Dispatch<React.SetStateAction<Config>>;
   start: () => void;
+  open: boolean;
 }
 
 const Menu = (props: Props): JSX.Element => {
-  const { config, setConfig, start } = props;
+  const { config, setConfig, start, open } = props;
   return (
-    <div id="menu" className="bg-purple-900 fixed z-10 top-0 left-0 h-screen flex flex-col pt-20 px-4">
+    <div
+      id="menu"
+      className={classNames(
+        'bg-purple-900 fixed z-10 top-0 left-0 h-screen flex flex-col pt-20 px-4',
+        { open },
+      )}
+    >
       <div className="flex justify-between my-1">
         <label htmlFor="width" className="text-purple-300 text-sm mr-4">
           Width

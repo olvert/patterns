@@ -9,10 +9,12 @@ const Home = (): JSX.Element => {
   const mainRef = React.useRef<HTMLCanvasElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
+  const [open, setOpen] = React.useState<boolean>(true);
   const [context, setContext] = React.useState<CanvasRenderingContext2D | null>(null);
   const [config, setConfig] = React.useState<Config | null>(null);
 
   const start = () => {
+    setOpen(false);
     clearCanvas(context, config);
     computeAndDraw(context, config);
   };
@@ -50,8 +52,13 @@ const Home = (): JSX.Element => {
       </Head>
 
       <main ref={mainRef} className="w-screen h-screen relative flex items-center justify-center bg-purple-200 overflow-scroll">
-        <MenuButton />
-        { config !== null && <Menu config={config} setConfig={setConfig} start={start} /> }
+        <MenuButton open={open} setOpen={setOpen} />
+        { config !== null && <Menu
+          config={config}
+          setConfig={setConfig}
+          start={start}
+          open={open}
+        /> }
         { config !== null && <canvas
           id="canvas"
           ref={canvasRef}

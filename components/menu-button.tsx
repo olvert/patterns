@@ -1,10 +1,26 @@
 import React from 'react';
 import { Sliders } from 'react-feather';
+import classNames from 'classnames';
 
-const MenuButton = (): JSX.Element => (
-  <button className="fixed top-0 left-0 z-20 text-purple-200 m-4">
-    <Sliders size={30} />
-  </button>
-);
+type Props = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const MenuButton = (props: Props): JSX.Element => {
+  const { open, setOpen } = props;
+  return (
+    <button
+      id="menu-button"
+      className={classNames(
+        'fixed top-0 left-0 z-20 m-4',
+        { open },
+      )}
+      onClick={() => setOpen(!open)}
+    >
+      <Sliders size={30} />
+    </button>
+  );
+};
 
 export default MenuButton;
