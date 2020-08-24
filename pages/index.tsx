@@ -37,6 +37,8 @@ const Home = (): JSX.Element => {
         delay: 5,
       });
     }
+
+    mainRef.current.scrollLeft = (mainRef.current.scrollWidth - mainRef.current.clientWidth) / 2;
   }, [config]);
 
   return (
@@ -49,7 +51,7 @@ const Home = (): JSX.Element => {
         { config !== null && <canvas
           id="canvas"
           ref={canvasRef}
-          className="absolute top-0"
+          className="absolute top-0 inset-x-0"
           width={config.width * config.pixelSize}
           height={config.height * config.pixelSize}
           style={{
