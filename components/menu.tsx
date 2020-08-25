@@ -10,7 +10,13 @@ type Props = {
 }
 
 const Menu = (props: Props): JSX.Element => {
-  const { config, setConfig, start, open } = props;
+  const {
+    config,
+    setConfig,
+    start,
+    open,
+  } = props;
+
   return (
     <div
       id="menu"
@@ -24,7 +30,7 @@ const Menu = (props: Props): JSX.Element => {
           Width
         </label>
         <input
-          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-16"
+          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-24"
           name="width"
           id="width"
           type="number"
@@ -43,7 +49,7 @@ const Menu = (props: Props): JSX.Element => {
           Height
         </label>
         <input
-          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-16"
+          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-24"
           name="height"
           id="height"
           type="number"
@@ -62,7 +68,7 @@ const Menu = (props: Props): JSX.Element => {
           Rule
         </label>
         <select
-          className="bg-purple-200 text-purple-700 rounded text-sm w-16"
+          className="bg-purple-200 text-purple-700 rounded text-sm w-24"
           name="rule"
           id="rule"
           onChange={(event) => setConfig({
@@ -75,11 +81,28 @@ const Menu = (props: Props): JSX.Element => {
         </select>
       </div>
       <div className="flex justify-between my-1">
+        <label htmlFor="initial-row" className="text-purple-300 text-sm mr-4">
+          Initial row
+        </label>
+        <select
+          className="bg-purple-200 text-purple-700 rounded text-sm w-24"
+          name="initial-row"
+          id="initial-row"
+          onChange={(event) => setConfig({
+            ...config,
+            initialRow: event.currentTarget.value,
+          })}
+        >
+          <option value="single-cell">Single cell</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+      <div className="flex justify-between my-1">
         <label htmlFor="pixel-size" className="text-purple-300 text-sm mr-4">
           Pixel size
         </label>
         <input
-          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-16"
+          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-24"
           name="pixel-size"
           id="pixel-size"
           type="number"
@@ -98,7 +121,7 @@ const Menu = (props: Props): JSX.Element => {
           Delay
         </label>
         <input
-          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-16"
+          className="bg-purple-200 text-purple-700 rounded text-sm px-1 w-24"
           name="delay"
           id="delay"
           type="number"

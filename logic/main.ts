@@ -2,6 +2,7 @@ export type Config = {
   width: number,
   height: number,
   rule: string,
+  initialRow: string,
   pixelSize: number,
   delay: number,
 }
@@ -23,13 +24,28 @@ const getRule = (rule: string): number[] => {
   }
 };
 
-const createAxiom = (length: number): number[] => {
-  const axiom = new Array<number>(length).fill(0);
+const createSingleCellInitialRow = (length: number): number[] => {
+  const initialRow = new Array<number>(length).fill(0);
   const index = Math.floor(length / 2);
 
-  axiom[index] = 1;
+  initialRow[index] = 1;
 
-  return axiom;
+  return initialRow;
+};
+
+const createRandomInitialRow = (length: number): number[] => Array.from(
+  { length }, () => Math.round(Math.random()),
+);
+
+const getInitialRow = (initialRow: string, width: number) => {
+  switch (initialRow) {
+    case 'single-cell':
+      return createSingleCellInitialRow(width);
+    case 'random':
+      return createRandomInitialRow(width);
+    default:
+      throw new Error(`invalid argument in getInitialRow: ${initialRow}`);
+  }
 };
 
 const createNextRow = (currentRow: number[], rule: number[]): number[] => {
@@ -54,8 +70,8 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const computeAndDraw = async (context: CanvasRenderingContext2D, config: Config): Promise<void> => {
   const rule = getRule(config.rule);
-  const axiom = createAxiom(config.width);
-  const rows = [axiom];
+  const initialRow = getInitialRow(config.initialRow, config.width);
+  const rows = [initialRow];
 
   for (let i = 0; i < config.height; i += 1) {
     drawRow(context, rows[i], i, config.pixelSize);
