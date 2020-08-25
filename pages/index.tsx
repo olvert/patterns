@@ -37,6 +37,7 @@ const Home = (): JSX.Element => {
         width: mainRef.current.offsetWidth,
         height: mainRef.current.offsetHeight,
         rule: '30',
+        initialRow: 'single-cell',
         pixelSize: 2,
         delay: 5,
       });
