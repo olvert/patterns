@@ -30,11 +30,14 @@ button, input, select {
 }
 
 #menu-button {
-  @apply text-purple-900;
+  @apply text-purple-900 bg-purple-200;
 
   &.open {
-    @apply text-purple-200;
+    @apply text-purple-200 bg-transparent;
+    transition: color ease-in-out 300ms;
   }
+
+  transition: color ease-in-out 300ms, background-color ease-in-out 300ms 300ms;
 }
 
 #menu {

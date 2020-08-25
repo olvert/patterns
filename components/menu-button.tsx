@@ -13,7 +13,7 @@ const MenuButton = (props: Props): JSX.Element => {
     <button
       id="menu-button"
       className={classNames(
-        'fixed top-0 left-0 z-20 m-4',
+        'fixed top-0 left-0 z-20 m-2 p-2 rounded-full',
         { open },
       )}
       onClick={() => setOpen(!open)}
